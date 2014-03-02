@@ -11,7 +11,9 @@ angular.module('game29App', [
       .when '/',
         templateUrl: 'partials/main'
         controller: 'MainCtrl'
-      
+      .when '/play',
+        templateUrl: 'partials/play'
+        controller: 'PlayCtrl'
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
