@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('game29App')
-  .controller 'PlayCtrl', ($scope, $http, Socket) ->
+  .controller 'PlayCtrl', ($scope, $http, socket) ->
 
     $scope.roomName = 'default'
     $scope.messages = [
@@ -12,7 +12,6 @@ angular.module('game29App')
     $http.get('/api/awesomeThings').success (awesomeThings) ->
       $scope.awesomeThings = awesomeThings
 
-    socket = Socket
     socket.on 'init', (data) ->
       $scope.name = data.name
       $scope.users = data.users
