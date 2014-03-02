@@ -22,3 +22,10 @@ div
     form(ng-submit='changeName()')
       input(ng-model='newName')
       input(type='submit', value='Change Name')
+.clr
+    h3 Change Rooom
+    p Your current room name is
+      strong  {{roomName}}
+    form(ng-submit='changeRoom()')
+        input(ng-model='newRoom')
+        input(type='submit', value='Change Room')

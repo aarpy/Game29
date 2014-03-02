@@ -3,6 +3,7 @@
 angular.module('game29App')
   .controller 'PlayCtrl', ($scope, $http, Socket) ->
 
+    $scope.roomName = 'default'
     $scope.messages = [
       { user: 'test1', text: 'message1' }
       { user: 'test2', text: 'message2' }
@@ -61,7 +62,6 @@ angular.module('game29App')
           changeName $scope.name, $scope.newName
           $scope.name = $scope.newName
           $scope.newName = ""
-      return
 
     $scope.sendMessage = ->
       socket.emit "send:message",
@@ -76,5 +76,3 @@ angular.module('game29App')
 
       # clear message box
       $scope.message = ""
-
-    return

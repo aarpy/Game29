@@ -3,6 +3,7 @@
   'use strict';
   angular.module('game29App').controller('PlayCtrl', function($scope, $http, Socket) {
     var changeName, socket;
+    $scope.roomName = 'default';
     $scope.messages = [
       {
         user: 'test1',
@@ -64,7 +65,7 @@
       });
     };
     $scope.changeName = function() {
-      socket.emit("change:name", {
+      return socket.emit("change:name", {
         name: $scope.newName
       }, function(result) {
         if (!result) {
@@ -76,7 +77,7 @@
         }
       });
     };
-    $scope.sendMessage = function() {
+    return $scope.sendMessage = function() {
       socket.emit("send:message", {
         message: $scope.message
       });
