@@ -2,8 +2,9 @@
 (function() {
   'use strict';
   angular.module('game29App').controller('PlayCtrl', function($scope, $http, socket) {
-    var changeName;
-    $scope.roomName = 'default';
+    var changeName, changeRoom;
+    $scope.room = '';
+    $scope.rooms = ['room1', 'room2'];
     $scope.messages = [
       {
         user: 'test1',
@@ -18,13 +19,19 @@
     });
     socket.on('init', function(data) {
       $scope.name = data.name;
-      return $scope.users = data.users;
+      $scope.users = data.users;
+      return $scope.rooms = data.rooms;
     });
     socket.on('send:message', function(message) {
       return $scope.messages.push(message);
     });
     socket.on('change:name', function(data) {
       return changeName(data.oldName, data.newName);
+    });
+    socket.on('change:room', function(data) {
+      $scope.room = data.room;
+      $scope.users = data.users;
+      return $scope.rooms = data.rooms;
     });
     socket.on('user:join', function(data) {
       $scope.messages.push({
@@ -63,6 +70,16 @@
         text: "User " + oldName + " is now known as " + newName + "."
       });
     };
+    changeRoom = function(oldRoom, newRoom, newUsers) {
+      $scope.messages.length = 0;
+      $scope.messages.push({
+        user: 'chatroom',
+        text: "Changing room from " + oldRoom + " to " + newRoom + "."
+      });
+      $scope.name = $scope.newRoom;
+      $scope.newRoom = "";
+      return $scope.users = newUsers;
+    };
     $scope.changeName = function() {
       return socket.emit("change:name", {
         name: $scope.newName
@@ -76,7 +93,7 @@
         }
       });
     };
-    return $scope.sendMessage = function() {
+    $scope.sendMessage = function() {
       socket.emit("send:message", {
         message: $scope.message
       });
@@ -85,6 +102,19 @@
         text: $scope.message
       });
       return $scope.message = "";
+    };
+    return $scope.changeRoom = function() {
+      console.log("sending change:room to server");
+      return socket.emit("change:room", {
+        room: $scope.newRoom
+      }, function(result) {
+        console.log("recieved change:room response from server");
+        if (!result) {
+          return alert("There was an error changing your room");
+        } else {
+          return changeRoom($scope.room, result.users);
+        }
+      });
     };
   });
 

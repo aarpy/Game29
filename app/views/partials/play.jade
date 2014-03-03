@@ -1,6 +1,5 @@
 div(ng-include='\'partials/navbar.html\'')
 
-h1 Angular Socket.io IM Demo App
 div
   .col
     h3 Messages
@@ -25,7 +24,11 @@ div
 .clr
     h3 Change Rooom
     p Your current room name is
-      strong  {{roomName}}
+      strong  {{room}}
     form(ng-submit='changeRoom()')
+      p(ng-repeat='r in rooms') Select a room
+        input(type='radio', ng-model='$parent.newRoom', ng-value='r')
+        {{r}}
+      p Create new room
         input(ng-model='newRoom')
-        input(type='submit', value='Change Room')
+      input(type='submit', value='Change Room')

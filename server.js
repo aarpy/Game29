@@ -50,7 +50,9 @@ require('./lib/config/express')(app);
 require('./lib/routes')(app);
 
 // Socket.io Communication
-io.sockets.on('connection', require('./lib/hubs/socket'));
+io.sockets.on('connection', function(socket) {
+    require('./lib/hubs/socket')(socket, io);
+});
 
 // Start server
 server.listen(config.port, function () {
