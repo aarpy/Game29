@@ -41,27 +41,21 @@
       return $scope.users.push(data.name);
     });
     socket.on('user:left', function(data) {
-      var i, user, _i, _len, _ref;
       $scope.messages.push({
         user: 'chatroom',
         text: "User " + data.name + " has left."
       });
-      _ref = $scope.users;
-      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-        user = _ref[i];
-        if (user === data.name) {
-          $scope.users.splice(i, 1);
-          break;
-        }
-      }
+      return _.remove($scope.users, function(user) {
+        return user === data.name;
+      });
     });
     changeName = function(oldName, newName) {
-      var user, _i, _len, _ref;
+      var index, user, _i, _len, _ref;
       _ref = $scope.users;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        user = _ref[_i];
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+        user = _ref[index];
         if (user === oldName) {
-          user = newName;
+          $scope.users[index] = newName;
           break;
         }
       }

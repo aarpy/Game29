@@ -41,17 +41,14 @@ angular.module('game29App')
         user: 'chatroom'
         text: "User #{ data.name } has left."
 
-      for user, i in $scope.users
-        if user is data.name
-          $scope.users.splice i, 1
-          break;
-      return
+      _.remove $scope.users, (user) ->
+        user is data.name
 
     changeName = (oldName, newName) ->
       # rename user in list of users
-      for user in $scope.users
+      for user, index in $scope.users
         if user is oldName
-          user = newName
+          $scope.users[index] = newName
           break
 
       $scope.messages.push
