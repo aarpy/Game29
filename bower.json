@@ -10,10 +10,14 @@
     "angular-resource": "1.2.11",
     "angular-cookies": "1.2.11",
     "angular-sanitize": "1.2.11",
-    "angular-route": "1.2.11"
+    "angular-route": "1.2.11",
+    "socket.io-client": "latest",
+    "angular-socket.io-mock": "latest"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",
-    "angular-scenario": "1.2.11"
+    "angular-scenario": "1.2.11",
+    "socket.io-client": "latest",
+    "angular-socket.io-mock": "latest"
   }
 }

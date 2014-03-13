@@ -19,6 +19,6 @@ describe 'Controller: PlayCtrl', () ->
     }
 
   it 'should attach a list of awesomeThings to the scope', () ->
-    expect(scope.awesomeThings).toBeUndefined()
+    expect(scope.awesomeThings).to.be.undefined
     $httpBackend.flush()
-    expect(scope.awesomeThings.length).toBe 4
+    expect(scope.awesomeThings.length).to.be 4

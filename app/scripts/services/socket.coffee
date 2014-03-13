@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('game29App')
-  .service 'socket', ($rootScope) ->
+  .service 'socketz', ($rootScope) ->
     # AngularJS will instantiate a singleton by calling "new" on this function
     class Socket
       constructor: ->

@@ -1,8 +1,9 @@
 'use strict'
 
 angular.module('game29App')
-  .controller 'PlayCtrl', ($scope, $http, socket) ->
+  .controller 'PlayCtrl', ($scope, $http, socketz) ->
 
+    socket = socketz
     $scope.room = ''
     $scope.rooms = ['room1', 'room2'];
     $scope.messages = [

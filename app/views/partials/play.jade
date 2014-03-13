@@ -3,7 +3,6 @@ div(ng-include='\'partials/navbar.html\'')
 div
   .game29canvas
 
-
 div
   .col
     h3 Messages
@@ -32,7 +31,6 @@ div
     form(ng-submit='changeRoom()')
       p(ng-repeat='r in rooms') Select a room
         input(type='radio', ng-model='$parent.newRoom', ng-value='r')
-        {{r}}
       p Create new room
         input(ng-model='newRoom')
       input(type='submit', value='Change Room')
