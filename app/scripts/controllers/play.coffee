@@ -46,6 +46,14 @@ angular.module('game29App')
       _.remove $scope.users, (user) ->
         user is data.name
 
+    socket.on 'game:seat', (data) ->
+      $scope.messages.push
+        user: 'chatroom'
+        text: "User #{data.name} has seated at #{data.position} position."
+        
+    socket.on 'game:roundstarted', (data) ->
+      console.log data
+        
     changeName = (oldName, newName) ->
       # rename user in list of users
       for user, index in $scope.users
@@ -101,3 +109,11 @@ angular.module('game29App')
         else
           changeRoom $scope.room, result.users
 
+    $scope.seatPlayer = ->
+      console.log "sending game:seat to server"
+      socket.emit "game:seat"
+        name: $scope.name
+      , (result) ->
+        console.log "recieved game:seat response from server"
+        unless result
+          alert "There was an error game:seat your room #{result}"

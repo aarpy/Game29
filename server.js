@@ -51,7 +51,7 @@ require('./lib/routes')(app);
 
 // Socket.io Communication
 io.sockets.on('connection', function(socket) {
-    require('./lib/hubs/socket')(socket, io);
+    require('./lib/hubs/hub')(socket, io);
 });
 
 // Start server
