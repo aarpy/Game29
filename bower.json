@@ -11,13 +11,12 @@
     "angular-cookies": "1.2.11",
     "angular-sanitize": "1.2.11",
     "angular-route": "1.2.11",
-    "socket.io-client": "latest",
-    "angular-socket.io-mock": "latest"
+    "angular-socket-io": "latest"
   },
   "devDependencies": {
+    "socket.io-client": "latest",
     "angular-mocks": "1.2.11",
     "angular-scenario": "1.2.11",
-    "socket.io-client": "latest",
-    "angular-socket.io-mock": "latest"
+    "angular-socket.io-mock": "git@github.com:aarpy/angular-socket.io-mock.git"
   }
 }
