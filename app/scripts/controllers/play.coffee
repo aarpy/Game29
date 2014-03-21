@@ -19,6 +19,7 @@ angular.module('game29App')
       $scope.name = data.name
       $scope.users = data.users
       $scope.rooms = data.rooms
+      seatPlayer()
 
     socket.on 'send:message', (message) ->
       $scope.messages.push message
@@ -47,6 +48,7 @@ angular.module('game29App')
         user is data.name
 
     socket.on 'game:seat', (data) ->
+      console.log 'game:seat recieved on the client'
       $scope.messages.push
         user: 'chatroom'
         text: "User #{data.name} has seated at #{data.position} position."
@@ -74,6 +76,15 @@ angular.module('game29App')
       $scope.name = $scope.newRoom
       $scope.newRoom = ""
       $scope.users = newUsers
+
+    seatPlayer = () ->
+      console.log "sending game:seat to server"
+      socket.emit "game:seat",
+        name: $scope.name
+      , (result) ->
+        console.log "recieved game:seat response from server"
+        unless result
+          alert "There was an error game:seat your room #{result}"
 
     $scope.changeName = ->
       socket.emit "change:name",
@@ -110,10 +121,4 @@ angular.module('game29App')
           changeRoom $scope.room, result.users
 
     $scope.seatPlayer = ->
-      console.log "sending game:seat to server"
-      socket.emit "game:seat"
-        name: $scope.name
-      , (result) ->
-        console.log "recieved game:seat response from server"
-        unless result
-          alert "There was an error game:seat your room #{result}"
+      seatPlayer()
