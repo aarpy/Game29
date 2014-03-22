@@ -55,6 +55,7 @@ angular.module('game29App')
         
     socket.on 'game:roundstarted', (data) ->
       console.log data
+      @game = new App.Controllers.Game data.deck
         
     changeName = (oldName, newName) ->
       # rename user in list of users
