@@ -19,6 +19,10 @@ div
       input(size='60', ng-model='message')
       input(type='submit', value='Send')
   .clr
+    h3 Restart Game
+    form(ng-submit='restartGame()')
+      input(type='submit', value='Restart Game')
+  .clr
     h3 Play Game
     form(ng-submit='seatPlayer()')
       input(type='submit', value='Seat Player')

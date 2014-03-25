@@ -54,8 +54,9 @@ angular.module('game29App')
         text: "User #{data.name} has seated at #{data.position} position."
         
     socket.on 'game:roundstarted', (data) ->
+      console.log 'game:roundstarted - '
       console.log data
-      @game = new App.Controllers.Game data.deck
+      @game = new App.Controllers.Game data
         
     changeName = (oldName, newName) ->
       # rename user in list of users
@@ -123,3 +124,13 @@ angular.module('game29App')
 
     $scope.seatPlayer = ->
       seatPlayer()
+
+    $scope.restartGame = () ->
+      console.log "sending game:restart to server"
+      socket.emit "game:restart",
+        name: $scope.name
+      , (result) ->
+        console.log "recieved game:restart response from server"
+        unless result
+          alert "There was an error game:restart your room #{result}"
+

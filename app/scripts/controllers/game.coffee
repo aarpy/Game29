@@ -176,7 +176,6 @@ class App.Controllers.Game
   newGame: ->
     @calculateGeometry()
     @appendBaseElements()
-    @model.deal()
     for id, controller of @cardControllers
       controller.destroy()
     @cardControllers = {}
@@ -184,7 +183,7 @@ class App.Controllers.Game
       @cardControllers[card.id] = new App.Controllers.Card(card)
       @cardControllers[card.id].appendTo(@rootElement)
     @renderAfterCommand('deal')
-    @registerEventHandlers()
+    #@registerEventHandlers()
 
   processUserCommand: (cmd) ->
     @removeEventHandlers()
@@ -218,9 +217,9 @@ class App.Controllers.Game
 
   # Update GUI after the model has been updated according to cmd
   renderAfterCommand: (cmd) ->
-    @updateRestingStates()
-    @updateWidgets()
-    @animateCards(cmd)
+    # @updateRestingStates()
+    # @updateWidgets()
+    # @animateCards(cmd)
 
   updateRestingStates: ->
     zIndex = 1000
@@ -324,7 +323,7 @@ class App.Controllers.Game
       else 0
 
   removeEventHandlers: ->
-    $(@rootElement).rawdraggable('destroy')
+    # $(@rootElement).rawdraggable('destroy')
     $(@rootElement).off()
 
   registerEventHandlers: ->
@@ -489,4 +488,4 @@ class App.Controllers.Game
   load: (s) =>
     @model.loadHash(JSON.parse(s))
     @renderAfterCommand(null)
-    @registerEventHandlers()
+    # @registerEventHandlers()
